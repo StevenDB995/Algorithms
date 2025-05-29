@@ -38,10 +38,13 @@ public class ZeroOneKnapsack {
         return dp[weights.length][cap];
     }
 
+    // Optimise with a 1D solution since each row of states depends only on the last row
     public static int knapsack_1D(int[] weights, int[] values, int cap) {
         int[] dp = new int[cap + 1];
 
         for (int i = 0; i < weights.length; i++) {
+            // Update states based on the last row
+            // Use reverse iteration since the current j may only refer to a smaller or equal index from the last row
             for (int j = cap; j >= 1; j--) {
                 if (j >= weights[i]) {
                     dp[j] = Math.max(dp[j], dp[j - weights[i]] + values[i]);
