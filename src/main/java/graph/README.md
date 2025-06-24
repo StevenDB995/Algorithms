@@ -65,3 +65,14 @@ can be misleading, because in fact the algorithm is implemented by maintaining a
 after processing each vertex, instead of modifying the original graph.
 
 Kahn's algorithm is BFS-based (Breadth-First Search).
+
+### Depth-First Search
+
+Conceptual steps:
+
+1. For each node, recursively explore all of its neighbours;
+2. After visiting all neighbours of a node, push the node to a stack (post-order traversal);
+3. Once all nodes are visited, pop from the stack to get the topological sort.
+
+**Note:** A node is only pushed to the stack after all of its adjacent nodes are pushed, which implies that a node's 
+dependencies only appear after itself in the final topological order, guaranteeing the correctness of the algorithm.

@@ -2,7 +2,7 @@ package graph.topologicalsorting;
 
 import java.util.*;
 
-public class TopologicalSort {
+public class Kahn {
 
     /**
      * Kahn's Algorithm for topological sorting.
@@ -12,13 +12,13 @@ public class TopologicalSort {
      * @param graph The adjacency list representation of the graph
      * @return The topological order
      */
-    public static List<Integer> kahn(List<List<Integer>> graph) {
+    public static List<Integer> topologicalSort(List<List<Integer>> graph) {
         int numNodes = graph.size();
 
         // Initialise in-degrees
         int[] indegrees = new int[numNodes];
-        for (List<Integer> list : graph) {
-            for (int v : list) {
+        for (List<Integer> neighbors : graph) {
+            for (int v : neighbors) {
                 indegrees[v]++;
             }
         }
@@ -31,11 +31,11 @@ public class TopologicalSort {
             }
         }
 
-        // Process the queue and output the topological sort
-        List<Integer> topoSort = new ArrayList<>();
+        // Process the queue and output the topological order
+        List<Integer> topoOrder = new ArrayList<>();
         while (!q.isEmpty()) {
             int u = q.poll();
-            topoSort.add(u);
+            topoOrder.add(u);
             for (int v : graph.get(u)) {
                 indegrees[v]--;
                 if (indegrees[v] == 0) {
@@ -44,7 +44,7 @@ public class TopologicalSort {
             }
         }
 
-        return topoSort;
+        return topoOrder;
     }
 
 }
